@@ -24,4 +24,7 @@ type Claims struct {
 	UserId         string `json:"uid"`
 	OrganizationId string `json:"oid,omitempty"`
 	OnboardingStep string `json:"step,omitempty"`
+	// Role is the caller's role in OrganizationId (e.g. OWNER/ADMIN/MEMBER).
+	// Carried in the token so any service can authorize without calling nexy.
+	Role string `json:"role,omitempty"`
 }

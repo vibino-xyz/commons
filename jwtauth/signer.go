@@ -33,7 +33,7 @@ func NewSignerFromEnv() (*Signer, error) {
 
 func (s *Signer) AccessTTL() time.Duration { return s.accessTTL }
 
-func (s *Signer) Sign(userId, organizationId, onboardingStep string) (string, time.Time, error) {
+func (s *Signer) Sign(userId, organizationId, onboardingStep, role string) (string, time.Time, error) {
 	now := time.Now().UTC()
 	expiresAt := now.Add(s.accessTTL)
 
@@ -47,6 +47,7 @@ func (s *Signer) Sign(userId, organizationId, onboardingStep string) (string, ti
 		UserId:         userId,
 		OrganizationId: organizationId,
 		OnboardingStep: onboardingStep,
+		Role:           role,
 	}
 
 	token := gojwt.NewWithClaims(gojwt.SigningMethodHS256, claims)
