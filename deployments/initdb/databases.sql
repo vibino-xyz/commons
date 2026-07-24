@@ -1,0 +1,2 @@
+CREATE DATABASE synthy;
+CREATE DATABASE nexy;

@@ -1,0 +1,31 @@
+services:
+  postgres:
+    container_name: vibino_postgres
+    image: "postgres:18"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      # PG 18+ wants a single mount at the parent; it stores data in a
+      # version-specific subdir (e.g. /var/lib/postgresql/18/docker).
+      - postgres_data:/var/lib/postgresql
+      - ./initdb:/docker-entrypoint-initdb.d
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: vibino_rabbitmq
+    hostname: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
+volumes:
+  postgres_data:
+  rabbitmq_data:
