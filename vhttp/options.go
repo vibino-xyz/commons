@@ -1,4 +1,4 @@
-package whttp
+package vhttp
 
 import "go.uber.org/fx"
 
@@ -12,7 +12,7 @@ type fnOption func() fx.Option
 func (f fnOption) apply() fx.Option { return f() }
 
 // WithControllers registers one or more controller constructors. Each constructor
-// must return a whttp.Controller.
+// must return a vhttp.Controller.
 func WithControllers(controllers ...interface{}) Options {
 	return fnOption(func() fx.Option {
 		return registerControllers(controllers...)

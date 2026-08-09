@@ -1,4 +1,4 @@
-package whttp
+package vhttp
 
 import "go.uber.org/fx"
 
